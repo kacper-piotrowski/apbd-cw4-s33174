@@ -1,1 +1,2 @@
-# apbd-cw4-s33174
+# LinqConsoleLab s33174
+Rozwiązania 20 zadań z c# linq w pliku ZadaniaLinq.cs
