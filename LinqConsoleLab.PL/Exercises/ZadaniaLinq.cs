@@ -121,7 +121,9 @@ public sealed class ZadaniaLinq
     /// </summary>
     public IEnumerable<string> Zadanie06_CzyWszyscyProwadzacyMajaKatedre()
     {
-        //var method6 = DaneUczelni.Prowadzacy.All(p=>p.Katedra) //TODO
+        var method6 = DaneUczelni.Prowadzacy
+            .All(p => p.Katedra != null);
+        return method6 ? ["1"] : ["0"];
         throw Niezaimplementowano(nameof(Zadanie06_CzyWszyscyProwadzacyMajaKatedre));
     }
 
@@ -253,8 +255,11 @@ public sealed class ZadaniaLinq
     public IEnumerable<string> Zadanie13_GrupowanieZapisowWedlugPrzedmiotu()
     {
         var method13 = DaneUczelni.Zapisy
-            .Join(DaneUczelni.Przedmioty, z=>z.PrzedmiotId, p=>p.Id, (z,p) => $"{p.Nazwa}," )
-            .GroupBy() //TODO
+            .Join(DaneUczelni.Przedmioty, z => z.PrzedmiotId, p => p.Id, (z, p) => new { z, p })
+            .GroupBy(pz => pz.p.Nazwa)
+            .Select(pz => $"{pz.Key}, {pz.Count()}");
+            
+        return method13;
         throw Niezaimplementowano(nameof(Zadanie13_GrupowanieZapisowWedlugPrzedmiotu));
     }
 
